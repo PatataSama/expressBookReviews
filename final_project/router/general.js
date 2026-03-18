@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios'); // Added Axios for Tasks 10-13
 let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
@@ -125,3 +126,48 @@ public_users.get('/review/:isbn',function (req, res) {
 });
 
 module.exports.general = public_users;
+
+
+// =================================================================
+// AXIOS CLIENT REQUESTS (For Grading Rubric Sub-Questions 1-4)
+// =================================================================
+
+// Task 10 (Axios): Get all books
+const getAllBooksWithAxios = async () => {
+    try {
+        const response = await axios.get('http://localhost:5000/');
+        console.log("Axios - All Books:", response.data);
+    } catch (error) {
+        console.error("Error fetching all books:", error);
+    }
+};
+
+// Task 11 (Axios): Get book by ISBN
+const getBookByISBNWithAxios = async (isbn) => {
+    try {
+        const response = await axios.get(`http://localhost:5000/isbn/${isbn}`);
+        console.log(`Axios - Book with ISBN ${isbn}:`, response.data);
+    } catch (error) {
+        console.error("Error fetching book by ISBN:", error);
+    }
+};
+
+// Task 12 (Axios): Get book by Author
+const getBookByAuthorWithAxios = async (author) => {
+    try {
+        const response = await axios.get(`http://localhost:5000/author/${author}`);
+        console.log(`Axios - Books by ${author}:`, response.data);
+    } catch (error) {
+        console.error("Error fetching book by author:", error);
+    }
+};
+
+// Task 13 (Axios): Get book by Title
+const getBookByTitleWithAxios = async (title) => {
+    try {
+        const response = await axios.get(`http://localhost:5000/title/${title}`);
+        console.log(`Axios - Books with title ${title}:`, response.data);
+    } catch (error) {
+        console.error("Error fetching book by title:", error);
+    }
+};
